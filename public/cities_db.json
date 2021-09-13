@@ -1,0 +1,14 @@
+{
+  "cities": [
+    {
+      "Moscow": {
+        "name": "Moscow",
+        "id": "12345"
+      },
+      "Ozersk": {
+        "name": "Ozersk",
+        "id": "54321"
+      }
+    }
+  ]
+}
