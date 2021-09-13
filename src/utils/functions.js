@@ -23,7 +23,17 @@ const getArrayFromDb = (db) => {
 
 const addClass = (actualClass, newClass) => [actualClass, newClass].join(' ');
 
-const capitalizer = str => str[0].toUpperCase() + str.slice(1);
+const capitalizer = str => {
+    if (str.includes(' ')) {
+        return str.split(' ').map((word) => word[0].toUpperCase() + word.slice(1)).join(' ');
+    }
+
+    if (str.includes('-')) {
+        return str.split('-').map((word) => word[0].toUpperCase() + word.slice(1)).join('-');
+    }
+
+    return str[0].toUpperCase() + str.slice(1);
+}
 
 
 const checkLS = (key, field, initial) => (

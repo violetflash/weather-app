@@ -1,0 +1,42 @@
+@import "../../../variables";
+
+.selected {
+  &__city {
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 50px;
+    color: $accentColor;
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+
+    button {
+      letter-spacing: 0.65px;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        color: $accentColor;
+      }
+    }
+  }
+
+  &__find {
+    position: relative;
+    margin-left: 30px;
+    padding-left: 28px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background-image: url("./icons/location.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+  }
+}
