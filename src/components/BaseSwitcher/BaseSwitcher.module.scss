@@ -1,0 +1,45 @@
+@import "../../variables";
+
+.switcher {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 17px;
+
+  &::before {
+    content: "º";
+    position: absolute;
+    left: 0;
+    font-size: 18px;
+  }
+
+  button {
+    font-family: $fontFamily;
+    padding: 4px 14px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  &__celsius {
+    color: $mainColor;
+    background-color: transparent;
+    border: 1px solid rgba($accentColor, 0.4);
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+  }
+
+  &__fahrenheit {
+    color: $mainColor;
+    background-color: transparent;
+    border: 1px solid rgba($accentColor, 0.4);
+    border-left: none;
+    border-radius: 0 8px 8px 0;
+  }
+}
+
+.active {
+  color: $accentColor;
+  background-color: $accentBgColor;
+}
