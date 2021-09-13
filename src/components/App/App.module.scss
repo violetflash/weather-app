@@ -1,0 +1,31 @@
+@import "../../variables";
+
+.weatherApp {
+  overflow: hidden;
+  height: 100vh;
+  background-color: $bgColor;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    padding: 75px 0 120px;
+    min-height: 100vh;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__body {
+    display: flex;
+    flex: 1 0 auto;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__details {
+    flex: 0 0 auto;
+  }
+}

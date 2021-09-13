@@ -41,20 +41,20 @@ ul {
   padding: 0;
 }
 
-button {
-  display: block;
-  border: none;
-  padding: 0;
-  font-family: inherit;
-  color: inherit;
-  background: transparent;
-  cursor: pointer;
-
-  &:disabled {
-    background-color: $grey;
-    cursor: default;
-  }
-}
+//button {
+//  display: block;
+//  border: none;
+//  padding: 0;
+//  font-family: inherit;
+//  color: inherit;
+//  background: transparent;
+//  cursor: pointer;
+//
+//  &:disabled {
+//    background-color: $grey;
+//    cursor: default;
+//  }
+//}
 
 input {
   outline: transparent;
@@ -151,16 +151,4 @@ a {
   div {
     box-sizing: content-box;
   }
-}
-
-@keyframes ldio-bjmq8f3lyph {
-  0% {transform: rotate(0deg)}
-
-  50% {transform: rotate(180deg)}
-
-  100% {transform: rotate(360deg)}
-}
-
-:global {
-  @import 'node_modules/slick-carousel/slick/slick';
 }
