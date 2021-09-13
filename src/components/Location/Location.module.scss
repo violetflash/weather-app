@@ -11,6 +11,10 @@
   &__controls {
     display: flex;
     align-items: center;
+
+    button {
+      letter-spacing: 0.65px;
+    }
   }
 
   &__find {

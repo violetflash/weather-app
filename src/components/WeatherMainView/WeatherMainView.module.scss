@@ -1,11 +1,10 @@
 @import "../../variables";
 
 .weather {
-
+  padding-left: 20px;
   &__top {
     display: flex;
     align-items: center;
-    margin-bottom: 2px;
   }
 
   &__icon {
@@ -26,6 +25,7 @@
   }
 
   &__desc {
+    margin-top: 5px;
     padding-left: 2px;
     font-family: $fontFamily;
     font-size: 25px;

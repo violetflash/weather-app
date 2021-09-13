@@ -14,7 +14,7 @@
 
   &__header {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
   }
 
@@ -23,6 +23,7 @@
     flex: 1 0 auto;
     align-items: center;
     justify-content: center;
+    margin-bottom: 50px;
   }
 
   &__details {
