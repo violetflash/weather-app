@@ -21,6 +21,10 @@ const getArrayFromDb = (db) => {
     return arr;
 };
 
+function utcToLocale(epoch) {
+    return new Date(epoch * 1000).toLocaleString();
+}
+
 const addClass = (actualClass, newClass) => [actualClass, newClass].join(' ');
 
 const capitalizer = str => {
@@ -66,5 +70,6 @@ export {
     checkLS,
     getRandomIDsFromArr,
     getFirstName,
-    checkImageExist
+    checkImageExist,
+    utcToLocale,
 };

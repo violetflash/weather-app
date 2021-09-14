@@ -50,7 +50,7 @@ const Dropdown = (
                     <button onClick={() => cityHandler(name, id)}>{capitalizer(name)}</button>
                 </li>
             )
-    }) : <li className={s.dropdown__noMatch}>Совпадений не найдено</li>;
+    }) : <li className={s.dropdown__noMatch}>Данные отсутствуют</li>;
 
     const loader = !citiesList.full.length && !citiesList.inDropdown.length ? <Loader/> : null;
 
