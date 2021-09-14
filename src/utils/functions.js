@@ -8,24 +8,34 @@ const addConditionedStyle = (condition, actualClasses, newClass) => {
     return classes.join(' ');
 };
 
-const checkImageExist = async (url) => {
-    const res = await fetch(url);
-    return !/source-404/.test(res.url);
-}
-
-const getArrayFromDb = (db) => {
-    const arr = [];
-    for (const key in db) {
-        arr.push({ ...db[key] });
-    }
-    return arr;
+const getCelsius = (temp) => {
+    return `${Math.trunc(temp - 273)}`;
 };
+
+const windDegToText = deg => {
+    if (deg > 348.75) return 'Северный';
+    if (deg > 326.25) return 'С-С-З';
+    if (deg > 303.75) return 'Северо-Западный';
+    if(deg > 281.25) return 'З-С-З';
+    if(deg > 258.75) return 'Западный';
+    if(deg > 236.25) return 'З-Ю-З';
+    if(deg > 213.75) return 'Юго-Западный';
+    if(deg > 191.25) return 'Ю-Ю-З';
+    if(deg > 168.75) return 'Южный';
+    if(deg > 146.25) return 'Ю-Ю-В';
+    if(deg > 123.75) return 'Юго-Восточный';
+    if(deg > 101.25) return 'В-Ю-В';
+    if(deg > 78.75) return 'Восточный';
+    if(deg > 56.25) return 'В-С-В';
+    if(deg > 33.75) return 'Северо-Восточный';
+    if (deg > 11.25) return 'С-С-В';
+    if (deg > 0) return 'Северный';
+
+}
 
 function utcToLocale(epoch) {
     return new Date(epoch * 1000).toLocaleString();
 }
-
-const addClass = (actualClass, newClass) => [actualClass, newClass].join(' ');
 
 const capitalizer = str => {
     if (str.includes(' ')) {
@@ -39,37 +49,17 @@ const capitalizer = str => {
     return str[0].toUpperCase() + str.slice(1);
 }
 
-
 const checkLS = (key, field, initial) => (
     localStorage.getItem(key) ?
         JSON.parse(localStorage.getItem(key))[field] :
         initial
 );
 
-const getRandomIDsFromArr = (arr, num) => {
-    if (!arr) return [];
-    const newArr = new Set();
-    while (newArr.size !== num)  {
-        const elem = arr[Math.floor(Math.random() * arr.length)];
-        newArr.add(elem);
-    }
-
-    return Array.from(newArr);
-};
-
-const getFirstName = name => {
-    return name.split(' ')[0];
-}
-
-
 export {
-    addClass,
     addConditionedStyle,
-    getArrayFromDb,
     capitalizer,
     checkLS,
-    getRandomIDsFromArr,
-    getFirstName,
-    checkImageExist,
     utcToLocale,
+    getCelsius,
+    windDegToText
 };

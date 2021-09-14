@@ -1,41 +1,53 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import Location from "../Location/Location";
-import BaseSwitcher from "../BaseSwitcher/BaseSwitcher";
+import Control from "../Control/Control";
 import WeatherMainView from "../WeatherMainView/WeatherMainView";
 import WeatherDetails from "../WeatherDetails/WeatherDetails";
 
+import { _CITIES_CURR_ID, _INITIAL_ID } from "../../services/restApiService/restApiService";
+import Context from '../../services/context/Context';
 
 
-import useFetch from "../../hooks/useFetch/useFetch";
 
 import s from './App.module.scss';
+import useFetch from "../../hooks/useFetch/useFetch";
+import Loader from "../Loader";
 
 const App = () => {
+    const initialId = localStorage.getItem(_CITIES_CURR_ID) ?
+        JSON.parse(localStorage.getItem(_CITIES_CURR_ID)) : _INITIAL_ID;
 
-    const { response, error } = useFetch(2122104);
-    console.log(response);
-    // response.then(res => console.log(res));
+    const [searchId, setSearchId] = useState(initialId);
+    const [baseState, setBaseState] = useState('C');
+
+    const { response } = useFetch(searchId.id);
+
+    const value = {
+        searchId, setSearchId, baseState, setBaseState, response
+    }
+
+    const content = response ?
+        <Context.Provider value={value}>
+            <div className={s.weatherApp}>
+                <div className="container">
+                    <div className={s.weatherApp__content}>
+                        <Control />
+                        <WeatherMainView />
+                        <section className={s.weatherApp__details}>
+                            <WeatherDetails />
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </Context.Provider> : <Loader />
+
+
 
     return (
-        <div className={s.weatherApp}>
-            <div className="container">
-                <div className={s.weatherApp__content}>
-                    <header className={s.weatherApp__header}>
-                        <Location />
-                        <BaseSwitcher />
-                    </header>
-                    <section className={s.weatherApp__body}>
-                        <WeatherMainView />
-                    </section>
-                    <section className={s.weatherApp__details}>
-                        <WeatherDetails />
-                    </section>
-                </div>
+        <>
+            {content}
+        </>
 
-            </div>
-
-        </div>
     );
 };
 

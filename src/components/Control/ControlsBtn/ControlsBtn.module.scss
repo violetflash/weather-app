@@ -1,24 +1,24 @@
 @import "../../../variables";
 
-.selected {
-  &__city {
-    margin-bottom: 10px;
-    font-weight: 400;
-    font-size: 50px;
-    color: $accentColor;
+.controls {
+  display: flex;
+  align-items: center;
+  width: 100%;
+
+  @media (max-width: $md3+px) {
+    margin-left: 5px;
   }
 
-  &__controls {
-    display: flex;
-    align-items: center;
+  button {
+    letter-spacing: 0.65px;
+    transition: all 0.2s ease-in-out;
 
-    button {
-      letter-spacing: 0.65px;
-      transition: all 0.2s ease-in-out;
+    @media (max-width: $md3+px) {
+      font-size: 15px;
+    }
 
-      &:hover {
-        color: $accentColor;
-      }
+    &:hover {
+      color: $accentColor;
     }
   }
 

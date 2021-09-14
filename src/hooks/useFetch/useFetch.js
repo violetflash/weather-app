@@ -6,25 +6,34 @@ const useFetch = (id) => {
 
     useEffect(() => {
         const APIkey = 'e9bc19a6f7701bfb42833e22b1a7521a';
-        const currentQuery = `//api.openweathermap.org/data/2.5/weather?id=${id}&appid=${APIkey}`;
-        // const details = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=daily&appid=${APIkey}`;
-        // const query = type ? currentQuery : details;
+        const baseQuery = `//api.openweathermap.org/data/2.5/weather?id=${id}&appid=${APIkey}`;
 
         const fetchData = async() => {
             try {
-                const db = await fetch(currentQuery);
-                const res = await db.json();
+                const baseDb = await fetch(baseQuery);
+                const baseRes = await baseDb.json();
+                const query = `https://api.openweathermap.org/data/2.5/onecall?lat=${baseRes.coord.lat}&lon=${baseRes.coord.lon}&exclude=minutely,hourly&appid=${APIkey}`;
+                const db = await fetch(query);
+                const details = await db.json();
+
                 const weather = {
-                    coords: { lat: res.coord.lat, lon: res.coord.lon },
-                    wind: res.wind.speed,
-                    pressure: res.main.pressure,
-                    humidity: res.main.humidity
+                    name: baseRes.name,
+                    more: {
+                        id: details.current.weather[0].id,
+                        main: details.current.weather[0].main,
+                        desc: details.current.weather[0].description
+                    },
+                    wind: {
+                        speed: details.current.wind_speed,
+                        deg: details.current.wind_deg
+                    },
+                    temp: details.current.temp,
+                    pressure: details.current.pressure,
+                    humidity: details.current.humidity,
+                    pop: details.daily[0].pop
                 };
 
-                const details = `https://api.openweathermap.org/data/2.5/onecall?lat=${weather.coords.lat}&lon=${weather.coords.lon}&exclude=daily&appid=${APIkey}`;
-                const fullDb = await fetch(details);
-                const fullRes = await fullDb.json();
-                setResponse(fullRes);
+                setResponse(weather);
             } catch(err) {
                 setError(err);
             }

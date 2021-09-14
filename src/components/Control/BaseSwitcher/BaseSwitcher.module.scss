@@ -1,4 +1,4 @@
-@import "../../variables";
+@import "../../../variables";
 
 .switcher {
   position: relative;
@@ -7,6 +7,10 @@
   justify-content: center;
   margin-top: 9px;
   padding-left: 17px;
+
+  @media (max-width: $md3+px) {
+    margin: 7px 28px 0 20px;
+  }
 
   &::before {
     content: "º";

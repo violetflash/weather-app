@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+
+import Context from '../../../services/context/Context';
 
 import s from './BaseSwitcher.module.scss';
-import { addConditionedStyle } from "../../utils/functions";
+import { addConditionedStyle } from "../../../utils/functions";
 
-const BaseSwitcher = props => {
-    const [activeBaseState, setActiveBaseState] = useState('C');
+const BaseSwitcher = () => {
+    const { baseState, setBaseState } = useContext(Context);
 
     const switchHandler = (e) => {
-        setActiveBaseState(e.target.name);
+        setBaseState(e.target.name);
     };
 
     const bases = ["C", "F"];
     const switchButtons = bases.map((base) => {
+
         const initialClass = base === "C" ? [s.switcher__celsius] : [s.switcher__fahrenheit];
-        const btnClass = addConditionedStyle(activeBaseState === base, initialClass, s.active);
+        const btnClass = addConditionedStyle(baseState === base, initialClass, s.active);
 
         return (
             <button

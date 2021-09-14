@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import restApiService from "../../../../services/restApiService/restApiService";
+import React, { useEffect } from 'react';
 import Loader from "../../../Loader";
 
+// import Context from '../../../../services/context/Context';
+
+import restApiService from "../../../../services/restApiService/restApiService";
 import { capitalizer } from "../../../../utils/functions";
 
 import s from './Dropdown.module.scss';
@@ -10,10 +12,11 @@ const Dropdown = (
     {
         setInputValue,
         setIsDropdownOpen,
-        setSearchTerm,
         citiesList, setCitiesList,
+        setChoice
     }) => {
 
+    // const { setSearchId } = useContext(Context);
     const { getCitiesList } = restApiService;
 
     useEffect(() => {
@@ -21,11 +24,11 @@ const Dropdown = (
             .then((res) => {
                 setCitiesList({ full: res.cities, inDropdown: res.cities });
             });
-    }, []);
+    }, [setCitiesList, getCitiesList]);
 
     const cityHandler = (name, id) => {
         setInputValue(capitalizer(name));
-        setSearchTerm({ name, id });
+        setChoice({ name: capitalizer(name), id });
         setIsDropdownOpen(false);
     }
 

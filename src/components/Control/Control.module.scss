@@ -1,0 +1,12 @@
+@import "../../variables";
+
+.control {
+  position: relative;
+  min-height: 93px;
+
+  &__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}

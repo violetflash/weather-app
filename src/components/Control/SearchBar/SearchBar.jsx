@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+
+import Dropdown from "./Dropdown/Dropdown";
+import Context from '../../../services/context/Context';
 
 import s from './SearchBar.module.scss';
-// import { addConditionedStyle } from "../../../utils/functions";
-import Dropdown from "./Dropdown/Dropdown";
+import { _CITIES_CURR_ID } from "../../../services/restApiService/restApiService";
 
-const SearchBar = ({ setShowSearchBar, searchTerm, setSearchTerm }) => {
+
+const SearchBar = ({ setShowSearchBar }) => {
+    const { setSearchId } = useContext(Context);
+
+    const [choice, setChoice] = useState(null);
     const [inputValue, setInputValue] = useState("");
     const [isDropdownOpen, setIsDropdownOpen] = useState(true);
     const [citiesList, setCitiesList] = useState({ full: [], inDropdown: [] });
 
-    const closeHandler = () => {
+    const okHandler = () => {
         setShowSearchBar(false);
+        setSearchId({ ...choice });
+        localStorage.setItem(_CITIES_CURR_ID, JSON.stringify({ ...choice }));
     };
 
     const inputHandler = (e) => {
@@ -22,7 +30,8 @@ const SearchBar = ({ setShowSearchBar, searchTerm, setSearchTerm }) => {
         const regExp = new RegExp(e.target.value, 'i');
 
         setIsDropdownOpen(true);
-        setSearchTerm("");
+        setChoice("");
+        // setSearchId(null);
         setInputValue(e.target.value);
         setCitiesList(() => {
             return {
@@ -36,12 +45,12 @@ const SearchBar = ({ setShowSearchBar, searchTerm, setSearchTerm }) => {
         <Dropdown
             setInputValue={setInputValue}
             setIsDropdownOpen={setIsDropdownOpen}
-            setSearchTerm={setSearchTerm}
             citiesList={citiesList}
             setCitiesList={setCitiesList}
+            setChoice={setChoice}
         /> : null;
 
-    const confirm = searchTerm ? <button className={s.search__confirm} onClick={closeHandler}>ОК</button> : null;
+    const confirm = choice ? <button className={s.search__confirm} onClick={okHandler}>ОК</button> : null;
 
     return (
         <div className={s.search}>
