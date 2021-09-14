@@ -6,31 +6,63 @@ import { capitalizer } from "../../../../utils/functions";
 
 import s from './Dropdown.module.scss';
 
-const Dropdown = ({ setInputValue }) => {
-    const [citiesList, setCitiesList] = useState(null);
+const Dropdown = (
+    {
+        setInputValue,
+        setIsDropdownOpen,
+        setSearchTerm,
+        citiesList, setCitiesList,
+    }) => {
 
-    const { getResource, _CITIES_DB } = restApiService;
+    const { getCitiesList } = restApiService;
 
     useEffect(() => {
-        getResource(_CITIES_DB)
-            .then((res) => setCitiesList(res.cities));
+        getCitiesList()
+            .then((res) => {
+                setCitiesList({ full: res.cities, inDropdown: res.cities });
+            });
     }, []);
 
-    const cityHandler = (name) => setInputValue(capitalizer(name));
+    const cityHandler = (name, id) => {
+        setInputValue(capitalizer(name));
+        setSearchTerm({ name, id });
+        setIsDropdownOpen(false);
+    }
 
-    const dropdownList = citiesList ? citiesList.map((city) => {
-        const { name, id } = city;
-        return (
-            <li className={s.dropdown__city} key={id}>
-                <button onClick={() => cityHandler(name)}>{capitalizer(name)}</button>
-            </li>
-        )
-    }) : <Loader />;
+    const sortByName = (a, b) => {
+        if (a.name > b.name) {
+            return 1;
+        }
+
+        if (a.name < b.name) {
+            return -1;
+        }
+
+        return 0;
+    };
+
+    const dropdown = citiesList.inDropdown.length && citiesList.full.length ? citiesList.inDropdown
+        .sort(sortByName)
+        .map((city) => {
+            const { name, id } = city;
+            return (
+                <li className={s.dropdown__city} key={id}>
+                    <button onClick={() => cityHandler(name, id)}>{capitalizer(name)}</button>
+                </li>
+            )
+    }) : <li className={s.dropdown__noMatch}>Совпадений не найдено</li>;
+
+    const loader = !citiesList.full.length && !citiesList.inDropdown.length ? <Loader/> : null;
+
 
     return (
-        <ul className={s.dropdown}>
-            {dropdownList}
-        </ul>
+        <div className={s.dropdown}>
+            <ul className={s.dropdown__list}>
+                {loader}
+                {dropdown}
+            </ul>
+        </div>
+
     )
 
 };

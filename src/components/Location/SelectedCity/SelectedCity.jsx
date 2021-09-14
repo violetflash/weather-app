@@ -1,11 +1,12 @@
 import React from 'react';
 import s from "./SelectedCity.module.scss";
 
-const SelectedCity = ({ showSearchBar, setShowSearchBar }) => {
+const SelectedCity = ({ showSearchBar, setShowSearchBar, setSearchTerm }) => {
 
     const findLocationClass = [s.selected__btn, s.selected__find];
 
     const showCitiesHandler = () => {
+        setSearchTerm("");
         setShowSearchBar(true);
     };
 
