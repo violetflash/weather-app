@@ -24,3 +24,15 @@
     flex: 0 0 auto;
   }
 }
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: $bgColor;
+
+  @media (max-width: $md3+px) {
+    background-color: $mobileBgColor;
+  }
+}

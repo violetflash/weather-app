@@ -39,7 +39,11 @@ const App = () => {
                     </div>
                 </div>
             </div>
-        </Context.Provider> : <Loader />
+        </Context.Provider> :
+        <div className={s.loader}>
+            <Loader />
+        </div>
+
 
 
 
