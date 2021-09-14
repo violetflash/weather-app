@@ -6,7 +6,7 @@ import DetailsItem from './DetailsItem/DetailsItem';
 import s from './WeatherDetails.module.scss';
 import { windDegToText } from "../../utils/functions";
 
-const WeatherDetails = props => {
+const WeatherDetails = () => {
     const { response } = useContext(Context);
     const { wind, humidity, pressure, pop } = response;
     const windValue = `${wind.speed} м/с, ${windDegToText(wind.deg)}`

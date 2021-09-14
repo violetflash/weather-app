@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 
 import Context from '../../services/context/Context';
-// import useFetch from "../../hooks/useFetch/useFetch";
-
 
 import s from './WeatherMainView.module.scss';
 import cloud from './icons/cloud.svg';

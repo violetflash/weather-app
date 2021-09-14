@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import Loader from "../../../Loader";
 
-// import Context from '../../../../services/context/Context';
-
 import restApiService from "../../../../services/restApiService/restApiService";
 import { capitalizer } from "../../../../utils/functions";
 
@@ -16,7 +14,6 @@ const Dropdown = (
         setChoice
     }) => {
 
-    // const { setSearchId } = useContext(Context);
     const { getCitiesList } = restApiService;
 
     useEffect(() => {
