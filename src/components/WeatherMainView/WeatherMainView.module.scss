@@ -19,12 +19,23 @@
   }
 
   &__top {
+    position: relative;
     display: flex;
     align-items: center;
+    padding-left: 152px;
+
+    @media (max-width: $md2+px) {
+      padding-left: 132px;
+    }
+
+    @media (max-width: $md3+px) {
+      padding-left: 102px;
+    }
   }
 
   &__icon {
-    margin-right: 12px;
+    position: absolute;
+    left: 0;
     width: 140px;
     height: 140px;
 
