@@ -3,15 +3,13 @@ import React, { useState } from 'react';
 import Control from "../Control/Control";
 import WeatherMainView from "../WeatherMainView/WeatherMainView";
 import WeatherDetails from "../WeatherDetails/WeatherDetails";
+import Loader from "../Loader";
 
 import { _CITIES_CURR_ID, _INITIAL_ID } from "../../services/restApiService/restApiService";
 import Context from '../../services/context/Context';
-
-
-
-import s from './App.module.scss';
 import useFetch from "../../hooks/useFetch/useFetch";
-import Loader from "../Loader";
+import useTitle from "../../hooks/useTitle/useTitle";
+import s from './App.module.scss';
 
 const App = () => {
     const initialId = localStorage.getItem(_CITIES_CURR_ID) ?
@@ -19,7 +17,7 @@ const App = () => {
 
     const [searchId, setSearchId] = useState(initialId);
     const [baseState, setBaseState] = useState('C');
-
+    useTitle(searchId);
     const { response } = useFetch(searchId.id);
 
     const value = {
