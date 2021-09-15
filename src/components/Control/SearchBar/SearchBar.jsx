@@ -48,6 +48,7 @@ const SearchBar = ({ setShowSearchBar }) => {
             citiesList={citiesList}
             setCitiesList={setCitiesList}
             setChoice={setChoice}
+            setShowSearchBar={setShowSearchBar}
         /> : null;
 
     const confirm = choice ? <button className={s.search__confirm} onClick={okHandler}>ОК</button> : null;

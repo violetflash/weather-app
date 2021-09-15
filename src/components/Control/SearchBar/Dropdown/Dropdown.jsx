@@ -10,6 +10,7 @@ const Dropdown = (
     {
         setInputValue,
         setIsDropdownOpen,
+        setShowSearchBar,
         citiesList, setCitiesList,
         setChoice
     }) => {
@@ -46,18 +47,30 @@ const Dropdown = (
         .map((city) => {
             const { name, id } = city;
             return (
-                <li className={s.dropdown__city} key={id}>
-                    <button onClick={() => cityHandler(name, id)}>{capitalizer(name)}</button>
+                <li className={s.dropdown__item} key={id}>
+                    <button
+                        className={s.dropdown__btn}
+                        onClick={() => cityHandler(name, id)}
+                    >
+                        {capitalizer(name)}
+                    </button>
                 </li>
             )
     }) : <li className={s.dropdown__noMatch}>Данные отсутствуют</li>;
 
     const loader = !citiesList.full.length && !citiesList.inDropdown.length ? <Loader/> : null;
 
+    const closeHandler = () => {
+        setIsDropdownOpen(false);
+        setShowSearchBar(false);
+    };
 
     return (
         <div className={s.dropdown}>
             <ul className={s.dropdown__list}>
+                <li className={s.dropdown__item}>
+                    <button className={s.dropdown__back} onClick={closeHandler}>назад</button>
+                </li>
                 {loader}
                 {dropdown}
             </ul>
